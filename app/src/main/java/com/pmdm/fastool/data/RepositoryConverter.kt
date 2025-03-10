@@ -18,3 +18,5 @@ fun Rep.toRepMock(): RepMock = RepMock(
     this.horaInicio,
     this.horaFin
 )
+
+fun MutableList<RepMock>.toRep() = this.map {it.toRep()}.toMutableList()
