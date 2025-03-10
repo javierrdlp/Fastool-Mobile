@@ -50,4 +50,8 @@ class RepDaoMock {
         )
     )
 
+    fun get(): MutableList<RepMock> = reparaciones
+    fun get(id: Int): RepMock? = reparaciones.find { r -> r.id == id}
+    fun get(matricula: String): MutableList<RepMock> = reparaciones.filter {r -> r.matricula == matricula}.toMutableList()
+
 }
