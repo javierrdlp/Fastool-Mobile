@@ -2,8 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.compose.compiler)
-//    alias(libs.plugins.devtools.ksp)
-//    alias(libs.plugins.com.google.dagger)
+    alias(libs.plugins.devtools.ksp)
+    alias(libs.plugins.com.google.dagger)
     id("kotlin-parcelize")
 }
 
@@ -64,10 +64,12 @@ dependencies {
     implementation(libs.pmdm.ies.balmis.components)
     implementation(libs.pmdm.ies.balmis.utilities)
 
-//    implementation(libs.dagger.hilt.android)
-//    implementation(libs.androidx.hilt.navigation.compose)
-//    ksp(libs.dagger.hilt.android.compiler)
-//    kspAndroidTest(libs.dagger.hilt.android.compiler)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+
+    implementation(libs.dagger.hilt.android)
+    implementation(libs.androidx.hilt.navigation.compose)
+    ksp(libs.dagger.hilt.android.compiler)
+    kspAndroidTest(libs.dagger.hilt.android.compiler)
 //
 //    implementation(libs.compose.navigation)
 //

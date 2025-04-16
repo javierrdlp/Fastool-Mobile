@@ -1,4 +1,4 @@
-package com.pmdm.fastool.ui.features.reps
+package com.pmdm.fastool.ui.features.repair
 
 data class RepUiState(
     val id: Int,

@@ -1,6 +1,6 @@
 package com.pmdm.fastool.models
 
-data class Rep(
+data class Repair(
     val id: Int,
     val matricula: String,
     val descripcion: String,
