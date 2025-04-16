@@ -5,13 +5,14 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import com.pmdm.fastool.data.RepRepository
+import com.pmdm.fastool.data.RepairRepository
 import com.pmdm.fastool.data.toReoUiState
 import com.pmdm.fastool.ui.features.repair.components.ScaffoldEvent
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class RepairViewModel : ViewModel() {
-
-    private val repository: RepRepository = RepRepository()
+@HiltViewModel
+class RepairViewModel @Inject constructor(private val repository: RepairRepository) : ViewModel() {
 
     // Este será tu listado observable por Compose
     var repState = mutableStateListOf<RepUiState>()

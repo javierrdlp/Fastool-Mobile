@@ -15,7 +15,9 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.pmdm.fastool.ui.features.repair.RepairViewModel
 import com.pmdm.fastool.ui.features.repair.RepairsScreen
 import com.pmdm.fastool.ui.theme.FasToolTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

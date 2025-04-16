@@ -1,9 +1,9 @@
 package com.pmdm.fastool.data
 
 import com.pmdm.fastool.data.mocks.RepairDaoMock
+import javax.inject.Inject
 
-class RepRepository {
-    val proveedorRep = RepairDaoMock()
+class RepairRepository @Inject constructor(private val proveedorRep: RepairDaoMock) {
 
     fun get() = proveedorRep.get().toRep()
     fun get(id: Int) = proveedorRep.get(id)
