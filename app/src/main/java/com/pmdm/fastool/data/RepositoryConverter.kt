@@ -1,10 +1,10 @@
 package com.pmdm.fastool.data
 
-import com.pmdm.fastool.data.mocks.RepMock
-import com.pmdm.fastool.models.Rep
-import com.pmdm.fastool.ui.features.reps.RepUiState
+import com.pmdm.fastool.data.mocks.RepairMock
+import com.pmdm.fastool.models.Repair
+import com.pmdm.fastool.ui.features.repair.RepUiState
 
-fun RepMock.toRep(): Rep = Rep(
+fun RepairMock.toRep(): Repair = Repair(
    this.id,
     this.matricula,
     this.descripcion,
@@ -12,7 +12,7 @@ fun RepMock.toRep(): Rep = Rep(
     this.horaFin
 )
 
-fun Rep.toRepMock(): RepMock = RepMock(
+fun Repair.toRepMock(): RepairMock = RepairMock(
     this.id,
     this.matricula,
     this.descripcion,
@@ -20,7 +20,7 @@ fun Rep.toRepMock(): RepMock = RepMock(
     this.horaFin
 )
 
-fun Rep.toRepUiState(): RepUiState = RepUiState(
+fun Repair.toRepUiState(): RepUiState = RepUiState(
     this.id,
     this.matricula,
     this.descripcion,
@@ -28,7 +28,7 @@ fun Rep.toRepUiState(): RepUiState = RepUiState(
     this.horaFin
 )
 
-fun RepUiState.toRep(): Rep = Rep(
+fun RepUiState.toRep(): Repair = Repair(
     this.id,
     this.matricula,
     this.descripcion,
@@ -36,5 +36,5 @@ fun RepUiState.toRep(): Rep = Rep(
     this.horaFin
 )
 
-fun MutableList<RepMock>.toRep() = this.map {it.toRep()}.toMutableList()
-fun MutableList<Rep>.toReoUiState() = this.map { it.toRepUiState() }.toMutableList()
+fun MutableList<RepairMock>.toRep() = this.map {it.toRep()}.toMutableList()
+fun MutableList<Repair>.toReoUiState() = this.map { it.toRepUiState() }.toMutableList()

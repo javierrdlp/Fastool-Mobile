@@ -2,7 +2,7 @@ package com.pmdm.fastool.data.mocks
 
 import java.text.SimpleDateFormat
 
-data class RepMock(
+data class RepairMock(
     val id: Int,
     val matricula: String,
     val descripcion: String,
