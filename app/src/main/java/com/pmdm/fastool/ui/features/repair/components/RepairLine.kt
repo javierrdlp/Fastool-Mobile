@@ -5,7 +5,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,11 +13,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -49,7 +45,7 @@ fun RepairCard(
 ) {
     var showDialog by remember { mutableStateOf(false) }
     if (showDialog) {
-        MinimalDialog(
+        DialogoReparacion(
             repair_text =repair.descripcion,
             onDismissRequest = { showDialog = false }
         )
@@ -178,7 +174,7 @@ fun RepairCard(
 }
 
 @Composable
-fun MinimalDialog(
+fun DialogoReparacion(
     repair_text: String,
     onDismissRequest: () -> Unit
 ) {
@@ -189,7 +185,7 @@ fun MinimalDialog(
                 .padding(24.dp),
             shape = RoundedCornerShape(20.dp),
             colors = CardDefaults.cardColors(
-                containerColor = Color(0xFF6495ED) // mismo azul que la Card
+                containerColor = Color(0xFF6495ED)
             ),
             elevation = CardDefaults.cardElevation(defaultElevation = 12.dp)
         ) {

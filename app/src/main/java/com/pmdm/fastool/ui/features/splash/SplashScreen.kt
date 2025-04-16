@@ -53,7 +53,7 @@ import kotlinx.coroutines.delay
 @Composable
 fun SplashScreen(
     modifier: Modifier = Modifier,
-    onNavigateToMain: () -> Unit
+    onNavigateToRepairScreen: () -> Unit
 ) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
@@ -70,8 +70,8 @@ fun SplashScreen(
     )
     // Lanzamos una "espera" de 2 segundos y navegamos
     LaunchedEffect(Unit) {
-        delay(2000L)
-        onNavigateToMain()
+        delay(5000L)
+        onNavigateToRepairScreen()
     }
 
     Box(
@@ -128,12 +128,10 @@ fun SplashScreen(
 @Composable
 fun SplashScreenPreview(){
     FasToolTheme{
-        val repairViewModel: RepairViewModel = viewModel()
-
         Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
            SplashScreen(
                modifier = Modifier.padding(innerPadding),
-               onNavigateToMain = {}
+               onNavigateToRepairScreen = {}
             )
         }
     }
