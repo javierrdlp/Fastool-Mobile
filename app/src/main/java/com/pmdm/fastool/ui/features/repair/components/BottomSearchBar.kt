@@ -34,7 +34,7 @@ fun SearchBar(
             OutlinedTextField(
                 value = textoBusqueda,
                 onValueChange = { textoBusqueda = it
-                                onRepairsEvent(RepairsEvent.onBuscarChange(textoBusqueda))},
+                                onRepairsEvent(RepairsEvent.OnBuscarChange(textoBusqueda))},
                 singleLine = true,
                 label = { Text("Matrícula") },
                 modifier = Modifier

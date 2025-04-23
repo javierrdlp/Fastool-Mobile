@@ -78,11 +78,11 @@ dependencies {
 //    implementation(libs.androidx.room.ktx)
 //    ksp(libs.androidx.room.compiler)
 //
-//    implementation(libs.com.squareup.retrofit2.converter.gson)
-//    implementation(libs.com.squareup.retrofit2.retrofit)
-//    implementation(platform(libs.com.squareup.okhttp3.okhttp.bom))
-//    implementation(libs.com.squareup.okhttp3.okhttp)
-//    implementation(libs.com.squareup.okhttp3.logging.interceptor)
+    implementation(libs.com.squareup.retrofit2.converter.gson)
+    implementation(libs.com.squareup.retrofit2.retrofit)
+    implementation(platform(libs.com.squareup.okhttp3.okhttp.bom))
+    implementation(libs.com.squareup.okhttp3.okhttp)
+    implementation(libs.com.squareup.okhttp3.logging.interceptor)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

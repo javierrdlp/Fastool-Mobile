@@ -5,20 +5,23 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.pmdm.fastool.data.RepairRepository
-import com.pmdm.fastool.data.toReoUiState
-import com.pmdm.fastool.ui.features.repair.components.ScaffoldEvent
+import com.pmdm.fastool.data.toRepUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class RepairViewModel @Inject constructor(private val repository: RepairRepository) : ViewModel() {
 
-    // Este será tu listado observable por Compose
     var repState = mutableStateListOf<RepUiState>()
         private set
 
-    var filterState by mutableStateOf(false)
+    var filterRepState by mutableStateOf(false)
+        private set
+
+    var filterDateState by mutableStateOf(false)
         private set
 
     var snackBarTextState by mutableStateOf("")
@@ -27,56 +30,71 @@ class RepairViewModel @Inject constructor(private val repository: RepairReposito
 
     init {
         loadRepairs()
+        println(repState)
     }
 
     private fun loadRepairs() {
-        repState.clear()
-        repState.addAll(repository.get().toReoUiState())
+        viewModelScope.launch {
+            try {
+
+                val repairs = repository.get()
+                repState.clear()
+                repState.addAll(repairs.map {
+                    it.toRepUiState()
+                })
+            } catch (e: Exception) {
+                // Manejo de error si algo falla en la llamada
+                snackBarTextState = "Error al cargar reparaciones: ${e.localizedMessage}"
+            }
+        }
     }
 
     fun onRepairsEvent(repairsEvent: RepairsEvent) {
         when (repairsEvent) {
-            is RepairsEvent.OnClickFiltrar -> {
+            is RepairsEvent.OnClickFiltrarRep -> {
 
-                if (!filterState) {
+                if (!filterRepState) {
                     val sortedList = repState.sortedBy { it.horaFin != null }
                     repState.clear()
                     repState.addAll(sortedList)
-                    filterState = true
+                    filterRepState = true
+                    filterDateState = false
                 } else {
                     loadRepairs()
-                    filterState = false
+                    filterRepState = false
+
+                }
+            }
+            is RepairsEvent.OnClickFiltrarDate -> {
+
+                if (!filterDateState) {
+                    val sortedList = repState.sortedByDescending { it.horaInicio }
+
+                    repState.clear()
+                    repState.addAll(sortedList)
+                    filterDateState = true
+                    filterRepState = false
+                } else {
+                    loadRepairs()
+                    filterDateState = false
+
                 }
             }
             is RepairsEvent.OnClickBuscar -> {
-                println("buscando")
-                val sortedList = repState.filter { it.matricula.contains(matriculaBuscar)  }
+                val sortedList = repState.filter { it.matricula.matricula.contains(matriculaBuscar)  }
                 repState.clear()
                 repState.addAll(sortedList)
             }
-            is RepairsEvent.onBuscarChange -> {
+            is RepairsEvent.OnBuscarChange -> {
                 if (repairsEvent.matricula.isEmpty()){
                     loadRepairs()
-                    filterState = false
+                    filterRepState = false
                 }
-                matriculaBuscar = repairsEvent.matricula
+                matriculaBuscar = repairsEvent.matricula.uppercase()
                 println(matriculaBuscar)
             }
+
         }
     }
-
-
-    fun onScaffoldEvent(scaffoldEvent: ScaffoldEvent) {
-        when (scaffoldEvent) {
-            is ScaffoldEvent.CloseSession -> {
-                snackBarTextState = "Cerrando sesión."
-            }
-
-            is ScaffoldEvent.ExitApplication -> {
-                snackBarTextState = "Saliendo de aplicación."
-            }
-        }
-    }
-
 
 }

@@ -26,9 +26,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -36,7 +38,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.pmdm.fastool.R
 import com.pmdm.fastool.ui.features.repair.RepUiState
-import java.text.SimpleDateFormat
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
 
 @Composable
 fun RepairCard(
@@ -46,7 +49,7 @@ fun RepairCard(
     var showDialog by remember { mutableStateOf(false) }
     if (showDialog) {
         DialogoReparacion(
-            repair_text =repair.descripcion,
+            repair = repair,
             onDismissRequest = { showDialog = false }
         )
     }
@@ -54,7 +57,7 @@ fun RepairCard(
         modifier = modifier
             .fillMaxWidth()
             .padding(4.dp)
-            .clickable{ showDialog = true},
+            .clickable { showDialog = true },
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
         shape = RoundedCornerShape(20.dp),
         colors = CardDefaults.cardColors(
@@ -86,7 +89,7 @@ fun RepairCard(
                     style = MaterialTheme.typography.titleMedium.copy(color = Color.White)
                 )
                 Text(
-                    text = repair.matricula,
+                    text = repair.matricula.matricula,
                     style = MaterialTheme.typography.titleMedium.copy(
                         fontWeight = FontWeight.Bold,
                         color = Color.White
@@ -104,7 +107,7 @@ fun RepairCard(
                         )
                     )
                     Text(
-                        text = repair.horaInicio.toPattern().split(" ")[1],
+                        text = repair.horaInicio.format(DateTimeFormatter.ofPattern("HH:mm")),
                         style = MaterialTheme.typography.titleMedium.copy(
                             fontWeight = FontWeight.Bold,
                             color = Color.White
@@ -122,7 +125,7 @@ fun RepairCard(
                     )
                     repair.horaFin?.let {
                         Text(
-                            text = it.toPattern().split(" ")[1],
+                            text = it.format(DateTimeFormatter.ofPattern("HH:mm")),
                             style = MaterialTheme.typography.titleMedium.copy(
                                 fontWeight = FontWeight.Bold,
                                 color = Color.White
@@ -145,7 +148,7 @@ fun RepairCard(
                     style = MaterialTheme.typography.titleMedium.copy(color = Color.White)
                 )
                 Text(
-                    text = repair.horaInicio.toPattern().split(" ")[0],
+                    text = repair.horaInicio.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")),
                     style = MaterialTheme.typography.titleMedium.copy(
                         fontWeight = FontWeight.Bold,
                         color = Color.White
@@ -175,10 +178,24 @@ fun RepairCard(
 
 @Composable
 fun DialogoReparacion(
-    repair_text: String,
+    repair: RepUiState,
     onDismissRequest: () -> Unit
 ) {
     Dialog(onDismissRequest = onDismissRequest) {
+        val contexto = LocalContext.current
+
+        val painterFoto = repair.matricula.marca.lowercase().let {
+            run {
+                val imageResource =
+                    contexto.resources.getIdentifier(
+                        repair.matricula.marca.lowercase(),
+                        "drawable",
+                        contexto.packageName
+                    )
+                painterResource(id = imageResource)
+            }
+        }
+
         Card(
             modifier = Modifier
                 .fillMaxWidth()
@@ -196,7 +213,26 @@ fun DialogoReparacion(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "REPARACIÓN ",
+                    text = "- VEHÍCULO -",
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.titleMedium.copy(
+                        color = Color(0xFF060E88),
+                        fontWeight = FontWeight.Bold
+                    )
+                )
+
+                Spacer(modifier = Modifier.height(10.dp))
+
+                Image(
+                    modifier = Modifier
+                        .width(60.dp)
+                        .clip(CircleShape),
+                    painter = painterFoto,
+                    contentDescription = "Estado reparación."
+                )
+                Spacer(modifier = Modifier.height(10.dp))
+                Text(
+                    text = repair.matricula.matricula,
                     textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.titleMedium.copy(
                         color = Color.White,
@@ -205,7 +241,50 @@ fun DialogoReparacion(
                 )
                 Spacer(modifier = Modifier.height(5.dp))
                 Text(
-                    text = repair_text,
+                    text = repair.matricula.modelo,
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.titleMedium.copy(
+                        color = Color.White,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                )
+
+
+
+
+                Spacer(modifier = Modifier.height(15.dp))
+
+                Text(
+                    text = "- CLIENTE -",
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.titleMedium.copy(
+                        color = Color(0xFF060E88),
+                        fontWeight = FontWeight.Bold
+                    )
+                )
+                Spacer(modifier = Modifier.height(5.dp))
+                Text(
+                    text = repair.matricula.clienteId.nombre,
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.titleMedium.copy(
+                        color = Color.White,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                )
+
+                Spacer(modifier = Modifier.height(15.dp))
+
+                Text(
+                    text = "- REPARACIÓN -",
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.titleMedium.copy(
+                        color = Color(0xFF060E88),
+                        fontWeight = FontWeight.Bold
+                    )
+                )
+                Spacer(modifier = Modifier.height(5.dp))
+                Text(
+                    text = repair.descripcion,
                     textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.titleMedium.copy(
                         color = Color.White,
@@ -218,10 +297,9 @@ fun DialogoReparacion(
 }
 
 
-
 @Composable
 fun RepairPicture(
-    horaFin: SimpleDateFormat?
+    horaFin: ZonedDateTime?
 ) {
     val painterFoto: Painter = if (horaFin != null) {
         painterResource(id = R.drawable.repair)
@@ -234,3 +312,5 @@ fun RepairPicture(
         contentDescription = "Estado reparación."
     )
 }
+
+
