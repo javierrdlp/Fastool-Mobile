@@ -60,7 +60,7 @@ fun SplashScreen(
         ), label = "Arrow"
     )
     LaunchedEffect(Unit) {
-        delay(5000L)
+        delay(3500L)
         onNavigateToRepairScreen.invoke()
     }
 
@@ -97,7 +97,7 @@ fun SplashScreen(
             Spacer(modifier = Modifier.height(16.dp))
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Icon(
-                    imageVector = Icons.Default.Refresh, // Usa este o un recurso tuyo
+                    imageVector = Icons.Default.Refresh,
                     contentDescription = "Flecha dando vueltas",
                     modifier = Modifier
                         .size(40.dp)
@@ -105,11 +105,6 @@ fun SplashScreen(
                     tint = Color(0xFF060E88)
                 )
                 Spacer(modifier = Modifier.height(24.dp))
-                Text(
-                    text = "Cargando...",
-                    style = MaterialTheme.typography.titleLarge,
-                    color = Color(0xFF060E88)
-                )
             }
         }
     }

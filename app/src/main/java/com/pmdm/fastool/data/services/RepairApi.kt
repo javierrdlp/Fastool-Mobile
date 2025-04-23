@@ -1,28 +1,27 @@
-package com.pmdm.fastool.ui.features.repair
+package com.pmdm.fastool.data.services
 
 import java.time.ZonedDateTime
 
-data class RepUiState(
+data class ReparacionApi(
     val id: Int,
     val descripcion: String,
     val horaInicio: ZonedDateTime,
     val horaFin: ZonedDateTime?,
-    val matricula: MatriculaUi
+    val matricula: MatriculaApi
 )
 
-data class MatriculaUi(
+data class MatriculaApi(
     val id: Int,
     val matricula: String,
     val marca: String,
     val modelo: String,
-    val clienteId: ClienteUi
+    val clienteId: ClienteApi
 )
 
-data class ClienteUi(
+data class ClienteApi(
     val id: Int,
     val nombre: String,
     val email: String,
     val cif: String,
     val password: String?
 )
-
