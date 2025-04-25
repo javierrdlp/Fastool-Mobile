@@ -35,7 +35,9 @@ import kotlinx.coroutines.launch
 fun RepairsScreen(
     modifier: Modifier = Modifier,
     listaReparaciones: List<RepUiState>,
-    onRepairsEvent: (RepairsEvent) -> Unit
+    onRepairsEvent: (RepairsEvent) -> Unit,
+    arrangeRepState: Boolean,
+    arrangeDateState: Boolean
 ) {
     val comportamientoAnteScrollSup = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
     val context = LocalContext.current
@@ -51,7 +53,9 @@ fun RepairsScreen(
             SuperiorAppBar(
                 onRepairsEvent = onRepairsEvent,
                 comportamientoAnteScroll = comportamientoAnteScrollSup,
-                onClickSalir = {activity?.finish()}
+                onClickSalir = {activity?.finish()},
+                arrangeDateState = arrangeDateState,
+                arrangeRepState = arrangeRepState
             )
         },
         bottomBar = {
@@ -95,7 +99,9 @@ fun TabScreenPreview() {
             RepairsScreen(
                 modifier = Modifier.padding(innerPadding),
                 listaReparaciones = repairViewModel.repState,
-                onRepairsEvent = repairViewModel::onRepairsEvent
+                onRepairsEvent = repairViewModel::onRepairsEvent,
+                arrangeRepState = repairViewModel.arrangeRepState,
+                arrangeDateState = repairViewModel.arrangeDateState
             )
         }
     }

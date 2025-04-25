@@ -61,7 +61,7 @@ fun RepairCard(
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
         shape = RoundedCornerShape(20.dp),
         colors = CardDefaults.cardColors(
-            containerColor = Color(0xFF6495ED) // azul suave
+            containerColor = Color(0xFF6495ED)
         )
     ) {
         Row(
@@ -204,7 +204,8 @@ fun DialogoReparacion(
             colors = CardDefaults.cardColors(
                 containerColor = Color(0xFF6495ED)
             ),
-            elevation = CardDefaults.cardElevation(defaultElevation = 12.dp)
+            elevation = CardDefaults.cardElevation(defaultElevation = 12.dp),
+            onClick = onDismissRequest
         ) {
             Column(
                 modifier = Modifier

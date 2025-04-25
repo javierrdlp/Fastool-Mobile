@@ -18,10 +18,10 @@ class RepairViewModel @Inject constructor(private val repository: RepairReposito
     var repState = mutableStateListOf<RepUiState>()
         private set
 
-    var filterRepState by mutableStateOf(false)
+    var arrangeRepState by mutableStateOf(false)
         private set
 
-    var filterDateState by mutableStateOf(false)
+    var arrangeDateState by mutableStateOf(false)
         private set
 
     var snackBarTextState by mutableStateOf("")
@@ -53,30 +53,30 @@ class RepairViewModel @Inject constructor(private val repository: RepairReposito
         when (repairsEvent) {
             is RepairsEvent.OnClickFiltrarRep -> {
 
-                if (!filterRepState) {
+                if (!arrangeRepState) {
                     val sortedList = repState.sortedBy { it.horaFin != null }
                     repState.clear()
                     repState.addAll(sortedList)
-                    filterRepState = true
-                    filterDateState = false
+                    arrangeRepState = true
+                    arrangeDateState = false
                 } else {
                     loadRepairs()
-                    filterRepState = false
+                    arrangeRepState = false
 
                 }
             }
             is RepairsEvent.OnClickFiltrarDate -> {
 
-                if (!filterDateState) {
+                if (!arrangeDateState) {
                     val sortedList = repState.sortedByDescending { it.horaInicio }
 
                     repState.clear()
                     repState.addAll(sortedList)
-                    filterDateState = true
-                    filterRepState = false
+                    arrangeDateState = true
+                    arrangeRepState = false
                 } else {
                     loadRepairs()
-                    filterDateState = false
+                    arrangeDateState = false
 
                 }
             }
@@ -88,7 +88,7 @@ class RepairViewModel @Inject constructor(private val repository: RepairReposito
             is RepairsEvent.OnBuscarChange -> {
                 if (repairsEvent.matricula.isEmpty()){
                     loadRepairs()
-                    filterRepState = false
+                    arrangeRepState = false
                 }
                 matriculaBuscar = repairsEvent.matricula.uppercase()
                 println(matriculaBuscar)

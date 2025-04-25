@@ -92,7 +92,7 @@ fun SplashScreen(
                     .size(200.dp)
                     .clip(RoundedCornerShape(16.dp)),
                 painter = painterResource(id = R.drawable.logo),
-                contentDescription = "Estado reparación."
+                contentDescription = "Logo Fastool"
             )
             Spacer(modifier = Modifier.height(16.dp))
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
