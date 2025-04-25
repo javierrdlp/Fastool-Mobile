@@ -18,7 +18,9 @@ fun NavGraphBuilder.repairsScreenDestination(
         RepairsScreen(
             modifier = Modifier.fillMaxSize(),
             listaReparaciones = repairViewModel.repState,
-            onRepairsEvent = repairViewModel::onRepairsEvent
+            onRepairsEvent = repairViewModel::onRepairsEvent,
+            arrangeRepState = repairViewModel.arrangeRepState,
+            arrangeDateState = repairViewModel.arrangeDateState
         )
     }
 }

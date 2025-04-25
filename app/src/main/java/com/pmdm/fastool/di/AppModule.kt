@@ -24,7 +24,7 @@ class AppModule {
     @Provides
     @Singleton
     fun provideRepairRepository(
-        repairService: RepairServiceImplementation  // Ahora usamos RepairService en lugar de RepairDaoMock
+        repairService: RepairServiceImplementation
     ): RepairRepository = RepairRepository(repairService)
 
     @Provides

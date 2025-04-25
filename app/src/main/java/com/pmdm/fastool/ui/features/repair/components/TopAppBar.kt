@@ -44,7 +44,9 @@ data class ItemMenuDesplegable(
 fun SuperiorAppBar(
     comportamientoAnteScroll: TopAppBarScrollBehavior,
     onRepairsEvent: (RepairsEvent) -> Unit,
-    onClickSalir:()-> Unit
+    onClickSalir:()-> Unit,
+    arrangeRepState: Boolean,
+    arrangeDateState: Boolean
 ) {
     var expandidoState by remember { mutableStateOf(false) }
     val cerrarMenu: () -> Unit = { expandidoState = false }
@@ -74,7 +76,7 @@ fun SuperiorAppBar(
                     IconButton(onClick = { onRepairsEvent(RepairsEvent.OnClickFiltrarRep) }) {
                         Icon(
                             Icons.Rounded.Build,
-                            tint = Color(0xFF056ad8),
+                            tint = if(arrangeRepState)Color(0xFF056ad8) else Color.Gray,
                             contentDescription = null
                         )
                     }
@@ -82,7 +84,7 @@ fun SuperiorAppBar(
                     IconButton(onClick = { onRepairsEvent(RepairsEvent.OnClickFiltrarDate) }) {
                         Icon(
                             Icons.Rounded.DateRange,
-                            tint = Color(0xFF056ad8),
+                            tint = if(arrangeDateState)Color(0xFF056ad8) else Color.Gray,
                             contentDescription = null
                         )
                     }
