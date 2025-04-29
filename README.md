@@ -11,9 +11,7 @@ Fastool consists of two applications: a mobile app and a desktop app. This is th
 <img src="https://github.com/user-attachments/assets/0571df23-bd18-462b-ba66-07f207e350f0" width="200" />
 <img src="https://github.com/user-attachments/assets/ba9e6417-c0c7-425c-aeb9-5ccc031f053d" width="200" />
 <img src="https://github.com/user-attachments/assets/672fecec-cb68-4b5c-8b6e-8efbf99b1681" width="200" />
-<img src="https://github.com/user-attachments/assets/372eec42-6c92-4465-9b84-1ba0c5f07ed7" width="200" />
-
-
+<img src="https://github.com/user-attachments/assets/f6b55bb6-01fb-461a-a6a3-9db25fcfc3e3" width="200" />
 
 ## Features
 
