@@ -30,6 +30,7 @@ fun SearchBar(
     val focusManager = LocalFocusManager.current
 
     BottomAppBar(
+
         actions = {
             OutlinedTextField(
                 value = textoBusqueda,
@@ -40,8 +41,7 @@ fun SearchBar(
                 modifier = Modifier
                     .weight(1f)
                     .padding(horizontal = 8.dp)
-                    .height(56.dp),
-
+                    .height(65.dp)
             )
         },
         floatingActionButton = {
