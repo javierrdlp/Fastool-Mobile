@@ -53,7 +53,7 @@ class AppModule {
 
         return Retrofit.Builder()
             .client(okHttpClient)
-            .baseUrl("http://10.0.2.2:8080/fasttool/datos/")
+            .baseUrl("http://tomcatj.northeurope.cloudapp.azure.com:8080/fasttool/datos/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
     }
@@ -63,8 +63,5 @@ class AppModule {
     fun provideRepairService(
         retrofit: Retrofit
     ) : RepairService = retrofit.create(RepairService::class.java)
-
-
-
 
 }
